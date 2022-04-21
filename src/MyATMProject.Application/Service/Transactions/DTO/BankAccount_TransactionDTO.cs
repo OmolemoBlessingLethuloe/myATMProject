@@ -25,8 +25,15 @@ namespace MyATMProject.Service.Transactions.DTO
     public class BankAccountTransactionDTO: EntityDto<Guid>
     {
         public string AccountNumber { get; set; }
-        public string TransactionType { get; set; }
-        public List<decimal> BankTransactions { get; set; }
+        //public string TransactionType { get; set; }
+        public List<HistoryDTO> BankTransactions { get; set; }
 
+    }
+
+    public class HistoryDTO: EntityDto<Guid>
+    {
+        public decimal TransactionAmount { get; set; }
+        public DateTime TransactionDate { get; set; }
+        public decimal Balance { get; set; }
     }
 }

@@ -124,8 +124,11 @@ namespace MyATMProject.Service.BankAccounts
                                                         BankTransactions = n.BankAccounts.Select(n => new BankAccountTransactionDTO()
                                                         {
                                                             AccountNumber = n.AccountNumber,
-
-                                                            BankTransactions = _joinRepository.GetAll().Where(x => x.BankAccount.Id == n.Id).Select(t => t.Transaction.Amount).ToList()
+                                                            BankTransactions = _joinRepository.GetAll().Where(x => x.BankAccount.Id == n.Id).Select(t => new HistoryDTO() { 
+                                                            TransactionAmount = t.Transaction.Amount,
+                                                            TransactionDate = t.Transaction.TransactionDate,
+                                                            Balance = t.Transaction.CurrentBalance
+                                                            }).ToList()
                                                         }).ToList()
                                                     });
                 result.TotalCount = _clientData.Count();
